@@ -68,7 +68,7 @@ $( '#calculator-form' ).submit(function() {
       checkResult = checkNumber(time, 1, 5);
       if (checkResult != "no errors") throw Error(checkResult);
 
-      if (replenish != "no" && replenish != "yes") {
+      if (replenish != "0" && replenish != "1") {
         throw Error("Неверный формат переключателя");
       } else {
         checkResult = checkNumber(replenishSum, replenishSumMin, replenishSumMax);
@@ -81,10 +81,29 @@ $( '#calculator-form' ).submit(function() {
     }
     $.ajax({
         data: $(this).serialize(),
-        type: $(this).attr('method'),
+        type: 'POST',
         url: $(this).attr('action'),
         success: function(response) {
             $('#calculator-result-value').html(response+" руб");
+        },
+        error :function( data ) {
+            if( data.status === 422 ) {
+                var errors = $.parseJSON(data.responseText);
+                $.each(errors, function (key, value) {
+                    // console.log(key+ " " +value);
+                $('#response').addClass("alert alert-danger");
+
+                    if($.isPlainObject(value)) {
+                        $.each(value, function (key, value) {
+                            console.log(key+ " " +value);
+                        $('#response').show().append(value+"<br/>");
+
+                        });
+                    }else{
+                    $('#response').show().append(value+"<br/>"); //this is my div with messages
+                    }
+                });
+            }
         }
     });
     return false;

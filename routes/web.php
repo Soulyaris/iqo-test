@@ -22,4 +22,4 @@ Route::get('/calculator', function () {
     return view('calculator');
 });
 
-Route::post('/calculator/execute', 'Calculator@calc');
+Route::post('/calculator/execute', 'Calculator@calc')->name('calculate');

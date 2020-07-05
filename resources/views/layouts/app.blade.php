@@ -7,16 +7,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('page-title')</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     @include('includes.header')
-    @include('includes.breadcrumbs')
-    @yield('content')
+    <div class="main-wrapper">
+        @include('includes.breadcrumbs')
+        @yield('content')
+    </div>
     @include('includes.footer')
 </body>
-    <script src="js/app.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/calc.js"></script>
+    <script src=" {{ asset('js/calc.js') }}"></script>
 </html>

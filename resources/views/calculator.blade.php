@@ -18,7 +18,8 @@
                 </ul>
             </div>
         @endif
-        <form class="calculator-form" id="calculator-form" action="/calculator/execute" method="POST">
+        <form class="calculator-form" id="calculator-form" action="{{ route('calculate') }}" method="POST">
+        @csrf
         <div class="calculator-params">
             <div class="calculator-params-row">
             <label for="calculator-date">Дата оформления вклада</label>
@@ -46,8 +47,8 @@
             <div class="calculator-params-row">
             <label for="calculator-repelish">Пополнение вклада</label>
             <div id="calculator-replenish">
-                <input id="calculator-replenish1" type="radio" name="calculator-replenish" value="no" checked> Нет
-                <input id="calculator-replenish2" type="radio" name="calculator-replenish" value="yes"> Да
+                <input id="calculator-replenish1" type="radio" name="calculator-replenish" value="0" checked> Нет
+                <input id="calculator-replenish2" type="radio" name="calculator-replenish" value="1"> Да
             </div>
             </div>
             <div class="calculator-params-row">
